@@ -34,6 +34,24 @@ int main(void) {
     make_line(T_LCYAN);
     make_line(T_WHITE);
     make_line(T_LWHITE);
+
+    printf("\n");
+    make_line(BG_BLACK);
+    make_line(BG_LBLACK);
+    make_line(BG_YELLOW);
+    make_line(BG_LYELLOW);
+    make_line(BG_GREEN);
+    make_line(BG_LGREEN);
+    make_line(BG_RED);
+    make_line(BG_LRED);
+    make_line(BG_BLUE);
+    make_line(BG_LBLUE);
+    make_line(BG_MAGENTA);
+    make_line(BG_LMAGENTA);
+    make_line(BG_CYAN);
+    make_line(BG_LCYAN);
+    make_line(BG_WHITE);
+    make_line(BG_LWHITE);
     
     printf("\n");
     make_line(BG_BLACK);
