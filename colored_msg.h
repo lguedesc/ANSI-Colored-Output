@@ -71,4 +71,12 @@ void print_lmagenta(char *msg, ...);
 void print_lcyan(char *msg, ...);
 void print_lwhite(char *msg, ...);
 
+/* Specific Messages */
+
+void print_success(char *msg, ...);
+void print_warning(char *msg, ...);
+void print_error(char *msg, ...);
+void print_debug(char *msg, ...);
+void print_directory(char *msg, ...);
+
 #endif

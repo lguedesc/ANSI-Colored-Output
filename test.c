@@ -357,5 +357,12 @@ int main(void) {
     make_line(BG_LWHITE T_WHITE);
     make_line(BG_LWHITE T_LWHITE);
 
-
+    printf("\n");
+    print_success("Success message\n");
+    print_warning("Warning message\n");
+    print_error("Error message\n");
+    print_debug("Debug message\n");
+    print_directory("This/is/a/directory/file.txt");
+    printf("\n\n");
+    
 }

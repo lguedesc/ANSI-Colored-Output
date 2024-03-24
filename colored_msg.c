@@ -165,3 +165,54 @@ void print_lwhite(char *msg, ...) {
     printf(RESET_STYLE);
 }
 
+/* Specific Messages */
+
+void print_success(char *msg, ...) {
+    printf(T_LGREEN);
+    va_list args;
+    va_start(args, msg);
+    vprintf(msg, args);
+    va_end(args);
+    printf(RESET_STYLE);
+}
+
+void print_warning(char *msg, ...) {
+    printf(T_LYELLOW);
+    printf("Warning: ");
+    va_list args;
+    va_start(args, msg);
+    vprintf(msg, args);
+    va_end(args);
+    printf(RESET_STYLE);
+}
+
+void print_error(char *msg, ...) {
+    printf(T_LRED);
+    printf("Error: ");
+    va_list args;
+    va_start(args, msg);
+    vprintf(msg, args);
+    va_end(args);
+    printf(RESET_STYLE);
+}
+
+void print_debug(char *msg, ...) {
+    printf(T_LBLUE);
+    printf("Debug: ");
+    va_list args;
+    va_start(args, msg);
+    vprintf(msg, args);
+    va_end(args);
+    printf(RESET_STYLE);
+}
+
+void print_directory(char *msg, ...) {
+    printf(T_LMAGENTA);
+    printf("'");
+    va_list args;
+    va_start(args, msg);
+    vprintf(msg, args);
+    va_end(args);
+    printf("'");
+    printf(RESET_STYLE);
+}
