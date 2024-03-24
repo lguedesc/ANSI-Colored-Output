@@ -10,5 +10,5 @@ It also contains specific functions to output directories, success, warning, err
 
 
 <p align="center">
-    <img title="Example_specific" alt="Example_specific" src="terminal_messages.png" width="180">
+    <img title="Example_specific" alt="Example_specific" src="terminal_messages.png" width="200">
 </p>
