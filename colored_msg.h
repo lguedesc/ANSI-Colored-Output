@@ -79,4 +79,7 @@ void print_error(char *msg, ...);
 void print_debug(char *msg, ...);
 void print_directory(char *msg, ...);
 
+/* Remove Style */
+char *remove_ansi_escape_codes(char *str); 
+
 #endif

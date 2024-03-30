@@ -5,6 +5,8 @@
 
 #include <stdarg.h>
 #include <stdio.h>
+#include <stdbool.h>
+#include <string.h>
 #include "colored_msg.h"
 
 /* Generic function that applies styles and colors */
@@ -215,4 +217,70 @@ void print_directory(char *msg, ...) {
     va_end(args);
     printf("'");
     printf(RESET_STYLE);
+}
+
+/* Remove style */
+
+static bool check_ANSI_start(char character, bool current_ANSI_status) {
+    /* This function checks if the position of the string is the start of an ANSI escape character */
+    bool inside_ANSI = current_ANSI_status;
+    // Check if the character is the first character of an ANSI escape sequence  
+    if (character == '\x1b' || character == '\033') {
+        inside_ANSI = true;
+    }
+    return inside_ANSI;
+}
+
+static bool check_ANSI_end(char character, bool current_ANSI_status) {
+    /* This function checks if the position of the string is the end of an ANSI escape character 
+       (this function must be called after all checks for inside_ANSI variable) */
+    bool inside_ANSI = current_ANSI_status;
+    // Check if position is inside an ANSI escape sequence and if it is the last position of the sequence
+    if ((inside_ANSI == true) && (character == 'm')) {
+        inside_ANSI = false;
+    }
+    return inside_ANSI;
+}
+
+static size_t count_ANSI_style_bytes(char *str) {
+    // Create variable to determine if the position of the string is inside a ANSI escape sequence
+    bool inside_ANSI = false;
+    // Create variable to count the number of bytes in memory ANSI escape sequences occupy for the str
+    size_t bytes = 0;
+    // Get length of the string
+    size_t len = strlen(str) + 1;
+    // Iterate over the string to find how many ANSI escape characters are there
+    for (size_t i = 0; i < len; i++) {
+        inside_ANSI = check_ANSI_start(str[i], inside_ANSI);
+        if (inside_ANSI == true) {
+            // Increase number of bytes by 1
+            bytes++;
+        }
+        inside_ANSI = check_ANSI_end(str[i], inside_ANSI);
+    }
+    return bytes;
+}
+
+char *remove_ansi_escape_codes(char *str) {
+    // Determine the number of bytes ANSI escape sequences occupy in the str
+    size_t ANSI_bytes = count_ANSI_style_bytes(str);
+    // Allocate enough memory for the new unformatted string
+    size_t str_len = strlen(str) + 1;
+    size_t new_str_len = str_len - ANSI_bytes;
+    char *new_str = malloc(new_str_len);   // length of the original string + 1 for '\0' - the ANSI bytes
+    // Counter to skip ANSI characters
+    size_t j = 0;
+    // Flag to determine if it is inside a ANSI sequence or not
+    bool inside_ANSI = false;
+    // Iterate over the original string to copy the characters to the new string
+    for (size_t i = 0; i < str_len; i++) {
+        inside_ANSI = check_ANSI_start(str[i], inside_ANSI);
+        if (inside_ANSI == false) {
+            // Copy the string and advance one position in the new str (j++)
+            new_str[j] = str[i];
+            j++;
+        }
+        inside_ANSI = check_ANSI_end(str[i], inside_ANSI);        
+    }
+    return new_str;
 }

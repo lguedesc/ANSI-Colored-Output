@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include "colored_msg.h"
 
 void make_line(char *color) {
@@ -364,5 +365,13 @@ int main(void) {
     print_debug("Debug message\n");
     print_directory("This/is/a/directory/file.txt");
     printf("\n\n");
-    
+
+    char *colored_msg = T_LGREEN "Green text " T_LMAGENTA "magenta text " T_LYELLOW "yellow text " T_LRED "red text.\n" RESET_STYLE;
+
+    printf("Remove color test:\n");
+    printf("Colored message: %s", colored_msg);
+    char *uncolored_msg = remove_ansi_escape_codes(colored_msg);
+    printf("Uncolored message: %s", uncolored_msg);
+
+    free(uncolored_msg);
 }
