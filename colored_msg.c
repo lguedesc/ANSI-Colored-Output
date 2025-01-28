@@ -1,7 +1,13 @@
-/* =====================================================================
-    This file contains all the functions related to the formatting of
-    pop-up messages in the program
-  ====================================================================== */
+/* 
+-------------------------------------------------------------------------------------------------------------- 
+This library provides functions and macros for formatting terminal output, enabling customized text styles and 
+colors for enhanced readability.
+
+Author: Luã G Costa [https://github.com/lguedesc]
+Created: 22 Mar 2024
+Last Update: 28 Jan 2025
+--------------------------------------------------------------------------------------------------------------
+*/
 
 #include <stdarg.h>
 #include <stdio.h>
